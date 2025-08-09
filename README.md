@@ -1,6 +1,6 @@
 <div align="center">
 
-![JE2BE Logo](logo.png)
+![JE2BE Logo](hero.png)
 
 # JE2BE Resource Pack Converter
 
