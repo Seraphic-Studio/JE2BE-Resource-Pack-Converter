@@ -1,0 +1,21 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "minecraft:zombie_villager_v2",
+      "geometry": {
+        "default": "geometry.zombie.villager_base",
+        "biome": "geometry.zombie.villager_biome",
+        "profession": "geometry.zombie.villager_profession"
+      },
+      "scripts": {
+        "should_update_bones_and_effects_offscreen": true
+      },
+      "render_controllers": [
+        "controller.render.zombie_villager_base",
+        "controller.render.zombie_villager_biome",
+        "controller.render.zombie_villager_profession"
+      ]
+    }
+  }
+}

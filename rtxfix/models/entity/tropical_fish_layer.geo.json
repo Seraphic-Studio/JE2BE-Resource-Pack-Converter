@@ -1,0 +1,86 @@
+{
+	"format_version": "1.8.0",
+	"geometry.tropicalfish_a_layer": {
+		"texturewidth": 32,
+		"textureheight": 32,
+		"visible_bounds_width": 2,
+		"visible_bounds_height": 1.5,
+		"visible_bounds_offset": [0, 0.25, 0],
+		"bones": [
+			{
+				"name": "body",
+				"pivot": [-0.5, 0, 0],
+				"cubes": [
+					{"origin": [-1, 0, -3], "size": [2, 3, 6], "uv": [0, 0], "inflate": 0.01},
+					{"origin": [0, 3, -2.9992], "size": [0, 4, 6], "uv": [10, -6], "inflate": 0.01}
+				]
+			},
+			{
+				"name": "tailfin",
+				"parent": "body",
+				"pivot": [0, 0, 3],
+				"cubes": [
+					{"origin": [0, 0, 3], "size": [0, 3, 4], "uv": [24, -4], "inflate": 0.01}
+				]
+			},
+			{
+				"name": "leftFin",
+				"parent": "body",
+				"pivot": [0.5, 0, 1],
+				"cubes": [
+					{"origin": [0.336, 0, -0.10594], "size": [2, 2, 0], "uv": [2, 12], "inflate": 0.01}
+				]
+			},
+			{
+				"name": "rightFin",
+				"parent": "body",
+				"pivot": [-0.5, 0, 1],
+				"cubes": [
+					{"origin": [-2.336, 0, -0.10594], "size": [2, 2, 0], "uv": [2, 16], "inflate": 0.01}
+				]
+			}
+		]
+	},
+	"geometry.tropicalfish_b_layer": {
+		"texturewidth": 32,
+		"textureheight": 32,
+		"visible_bounds_width": 3,
+		"visible_bounds_height": 2.5,
+		"visible_bounds_offset": [0, 0.75, 0],
+		"bones": [
+			{
+				"name": "body",
+				"pivot": [-0.5, 0, 0],
+				"cubes": [
+					{"origin": [-1, 0, -0.0008], "size": [2, 6, 6], "uv": [0, 20], "inflate": 0.01},
+					{"origin": [0, -5, -0.0008], "size": [0, 5, 6], "uv": [20, 21], "inflate": 0.01},
+					{"origin": [0, 6, -0.0008], "size": [0, 5, 6], "uv": [20, 10], "inflate": 0.01}
+				]
+			},
+			{
+				"name": "tailfin",
+				"parent": "body",
+				"pivot": [0, 0, 6],
+				"cubes": [
+					{"origin": [0, 0.0008, 6], "size": [0, 6, 5], "uv": [21, 16], "inflate": 0.01}
+				]
+			},
+			{
+				"name": "leftFin",
+				"parent": "body",
+				"pivot": [0.5, 0, 1],
+				"cubes": [
+					{"origin": [2.05673, 0, 2.35152], "size": [2, 2, 0], "uv": [2, 12], "inflate": 0.01}
+				]
+			},
+			{
+				"name": "rightFin",
+				"parent": "body",
+				"pivot": [-0.5, 0, 1],
+				"cubes": [
+					{"origin": [-4.05673, 0, 2.35152], "size": [2, 2, 0], "uv": [2, 16], "inflate": 0.01}
+				]
+			}
+		]
+	}
+}

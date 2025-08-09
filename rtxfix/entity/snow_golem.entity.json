@@ -1,0 +1,27 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "minecraft:snow_golem",
+      "min_engine_version": "1.8.0",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "geometry": {
+        "default": "geometry.snowgolem.v1.8",
+        "pumpkin": "geometry.snow_golem.pumpkin"
+      },
+      "textures": {
+        "default": "textures/entity/snow_golem",
+        "pumpkin": "textures/entity/snow_golem/snow_golem_pumpkin"
+      },
+      "scripts": {
+        "should_update_bones_and_effects_offscreen": true
+      },
+      "render_controllers": [
+        "controller.render.snowgolem",
+        "controller.render.snowgolem.pumpkin"
+      ]
+    }
+  }
+}

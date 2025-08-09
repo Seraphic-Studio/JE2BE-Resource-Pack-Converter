@@ -1,0 +1,18 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.mooshroom.mushrooms": {
+      "arrays": {
+        "textures": {
+          "array.mushrooms": [
+            "texture.red_mushroom",
+            "texture.brown_mushroom"
+          ]
+        }
+      },
+      "geometry": "geometry.mushrooms",
+      "materials": [{ "*": "material.default" }],
+      "textures": [ "array.mushrooms[query.variant]" ]
+    }
+  }
+}

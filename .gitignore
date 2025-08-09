@@ -1,0 +1,44 @@
+# Build artifacts
+dist/
+build/
+*.exe
+*.spec
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+*.txt
+conversion_report.txt
+missing_mappings.json
+
+# Test files
+*.mcpack
+*.zip
+test_*
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Backup files
+*.bak
+*.orig

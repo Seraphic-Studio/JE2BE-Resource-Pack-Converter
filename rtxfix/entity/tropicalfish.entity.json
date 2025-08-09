@@ -1,0 +1,21 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "minecraft:tropicalfish",
+      "geometry": {
+        "typeA": "geometry.tropicalfish_a",
+        "typeB": "geometry.tropicalfish_b",
+        "typeA_layer": "geometry.tropicalfish_a_layer",
+        "typeB_layer": "geometry.tropicalfish_b_layer"
+      },
+      "scripts": {
+        "should_update_bones_and_effects_offscreen": true
+      },
+      "render_controllers": [
+        "controller.render.tropicalfish",
+        "controller.render.tropicalfish_layer"
+      ]
+    }
+  }
+}

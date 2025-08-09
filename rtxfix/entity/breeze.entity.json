@@ -1,0 +1,24 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "minecraft:breeze",
+      "materials": {
+        "default": "entity_emissive_alpha",
+        "breeze_eyes": "entity_emissive_alpha",
+        "breeze_wind": "entity_emissive_alpha"
+      },
+      "spawn_egg": {
+        "texture": "spawn_egg_breeze"
+      },
+      "scripts": {
+        "pre_animation": [
+          "variable.t = Math.mod(Math.floor(query.life_time * 60.0 + query.frame_alpha), 128);",
+          "variable.m = Math.mod(Math.floor(query.life_time * 50.0 + query.frame_alpha), 128);",
+          "variable.b = Math.mod(Math.floor(query.life_time * 40.0 + query.frame_alpha), 128);"
+        ],
+        "should_update_bones_and_effects_offscreen": true
+      }
+    }
+  }
+}

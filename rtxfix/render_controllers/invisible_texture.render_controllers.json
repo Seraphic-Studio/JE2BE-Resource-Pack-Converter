@@ -1,0 +1,15 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.invisible_texture": {
+      "arrays": {
+        "textures": {
+          "array.textures": [ "texture.default", "texture.invisible" ]
+        }
+      },
+      "geometry": "geometry.default",
+      "materials": [{ "*": "material.default" }],
+      "textures": [ "array.textures[query.is_invisible]" ]
+    }
+  }
+}

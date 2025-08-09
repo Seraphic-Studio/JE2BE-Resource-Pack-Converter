@@ -1,0 +1,10 @@
+{
+  "format_version": "1.10.0",
+  "render_controllers": {
+    "controller.render.minecart.block": {
+      "geometry": "geometry.block",
+      "materials": [{ "*": "material.default" }],
+      "textures": [ "texture.block" ]
+    }
+  }
+}

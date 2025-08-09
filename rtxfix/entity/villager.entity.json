@@ -1,0 +1,23 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "minecraft:villager_v2",
+      "geometry": {
+        "default": "geometry.villager_base",
+        "biome": "geometry.villager_biome",
+        "profession": "geometry.villager_profession",
+        "level": "geometry.villager_level"
+      },
+      "scripts": {
+        "should_update_bones_and_effects_offscreen": true
+      },
+      "render_controllers": [
+        "controller.render.villager_base",
+        "controller.render.villager_biome",
+        "controller.render.villager_profession",
+        "controller.render.villager_level"
+      ]
+    }
+  }
+}

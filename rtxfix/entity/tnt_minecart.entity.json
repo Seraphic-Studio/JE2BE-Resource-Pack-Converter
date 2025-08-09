@@ -1,0 +1,24 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "minecraft:tnt_minecart",
+      "min_engine_version": "1.8.0",
+      "geometry": {
+        "default": "geometry.minecart.v1.8",
+        "block": "geometry.minecart.tnt"
+      },
+      "textures": {
+        "default": "textures/entity/minecart",
+        "block": "textures/entity/minecart/minecart_tnt"
+      },
+      "scripts": {
+        "should_update_bones_and_effects_offscreen": true
+      },
+      "render_controllers": [
+        "controller.render.minecart",
+        "controller.render.minecart.block"
+      ]
+    }
+  }
+}

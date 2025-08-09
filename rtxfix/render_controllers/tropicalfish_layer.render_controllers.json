@@ -1,0 +1,37 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.tropicalfish_layer": {
+      "arrays": {
+        "geometries": {
+          "array.models": [
+            "geometry.typeA_layer",
+            "geometry.typeB_layer"
+          ]
+        },
+        "textures": {
+          "array.patterns": [
+            "texture.aPattern1",
+            "texture.aPattern2",
+            "texture.aPattern3",
+            "texture.aPattern4",
+            "texture.aPattern5",
+            "texture.aPattern6",
+            "texture.bPattern1",
+            "texture.bPattern2",
+            "texture.bPattern3",
+            "texture.bPattern4",
+            "texture.bPattern5",
+            "texture.bPattern6"
+          ]
+        }
+      },
+      "geometry": "array.models[variable.TropicalFish.Base]",
+      "materials": [{ "*": "material.default" }],
+      "textures": [
+        "array.patterns[v.TropicalFish.Pattern]",
+        "array.patterns[v.TropicalFish.Pattern]"
+      ]
+    }
+  }
+}

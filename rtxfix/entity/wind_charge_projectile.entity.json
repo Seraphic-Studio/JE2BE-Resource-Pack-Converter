@@ -1,0 +1,17 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "minecraft:wind_charge_projectile",
+      "materials": {
+        "default": "entity_emissive_alpha"
+      },
+      "scripts": {
+        "pre_animation": [
+          "variable.w = math.mod(math.floor(q.life_time*60+q.frame_alpha),64);"
+        ],
+        "should_update_bones_and_effects_offscreen": true
+      }
+    }
+  }
+}

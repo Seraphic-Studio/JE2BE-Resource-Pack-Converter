@@ -1,0 +1,11 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.snowgolem.pumpkin": {
+      "geometry": "geometry.pumpkin",
+      "materials": [{ "*": "material.default" }],
+      "part_visibility": [{ "*": "!query.is_sheared" }],
+      "textures": [ "texture.pumpkin" ]
+    }
+  }
+}

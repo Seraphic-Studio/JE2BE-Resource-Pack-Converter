@@ -1,0 +1,29 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "minecraft:mooshroom",
+      "min_engine_version": "1.8.0",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "geometry": {
+        "default": "geometry.mooshroom.v1.8",
+        "mushrooms": "geometry.mooshroom.mushrooms"
+      },
+      "textures": {
+        "default": "textures/entity/cow/mooshroom",
+        "brown": "textures/entity/cow/brown_mooshroom",
+        "red_mushroom": "textures/blocks/mushroom_red",
+        "brown_mushroom": "textures/blocks/mushroom_brown"
+      },
+      "scripts": {
+        "should_update_bones_and_effects_offscreen": true
+      },
+      "render_controllers": [
+        "controller.render.mooshroom",
+        "controller.render.mooshroom.mushrooms"
+      ]
+    }
+  }
+}
