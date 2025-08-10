@@ -31,14 +31,6 @@
 ### Download Executable (Recommended)
 Download the latest `je2be.exe` from [releases](https://github.com/Seraphic-Studio/JE2BE-Resource-Pack-Converter/releases) for instant use.
 
-```bash
-# Basic conversion
-je2be.exe convert pack.zip output.mcpack
-
-# Full conversion with all features
-je2be.exe convert pack.zip output.mcpack --essentials --rtxfix
-```
-
 ### Python Installation
 ```bash
 git clone https://github.com/Seraphic-Studio/JE2BE-Resource-Pack-Converter
@@ -49,24 +41,27 @@ python je2be_converter.py convert pack.zip output.mcpack
 
 ## Usage Examples
 
+> [!NOTE]
+> Note: when your input or output pack name contains any whitespace (like: "PristineNature v1.2 Java.zip"), use quotation marks at the start and end of the pack name.
+
 ```bash
 # Convert with essential textures
-je2be.exe convert pack.zip output.mcpack --essentials
+./je2be.exe convert pack.zip output.mcpack --essentials
 
 # Convert with RTX optimizations
-je2be.exe convert pack.zip output.mcpack --rtxfix
+./je2be.exe convert pack.zip output.mcpack --rtxfix
 
 # Custom pack name and description
-je2be.exe convert pack.zip output.mcpack --pack-name "My Pack" --pack-description "Custom description"
+./je2be.exe convert pack.zip output.mcpack --pack-name "My Pack" --pack-description "Custom description"
 
 # Disable PBR conversion
-je2be.exe convert pack.zip output.mcpack --disable-pbr
+./je2be.exe convert pack.zip output.mcpack --disable-pbr
 
 # Show mapping information
-je2be.exe info
+./je2be.exe info
 
 # Validate mappings
-je2be.exe validate
+./je2be.exe validate
 ```
 
 ## PBR/RTX Conversion
