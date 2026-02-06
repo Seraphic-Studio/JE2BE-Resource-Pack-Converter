@@ -6,7 +6,6 @@ Creates Java Edition specific files and directory structure
 import json
 import logging
 from pathlib import Path
-from datetime import datetime
 from typing import Dict, List, Any, Optional
 
 logger = logging.getLogger(__name__)
@@ -44,6 +43,7 @@ class JavaStructureGenerator:
         """Generate the pack.mcmeta file for Java Edition"""
         try:
             if not pack_description:
+                from datetime import datetime
                 pack_description = f"Converted from Bedrock Edition on {datetime.now().strftime('%Y-%m-%d %H:%M')}"
             
             mcmeta = {

@@ -6,7 +6,7 @@ Handles texture conversion from Bedrock to Java Edition format
 import shutil
 import logging
 from pathlib import Path
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional, Set, Any
 
 logger = logging.getLogger(__name__)
 
@@ -186,7 +186,7 @@ class ReverseTextureConverter:
         except Exception as e:
             logger.warning(f"Failed to save missing mappings: {str(e)}")
     
-    def get_conversion_report(self) -> Dict[str, any]:
+    def get_conversion_report(self) -> Dict[str, Any]:
         """Get a detailed conversion report"""
         return {
             "converted_files": len(self.converted_files),
