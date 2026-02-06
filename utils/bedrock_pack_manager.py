@@ -39,7 +39,7 @@ class BedrockPackManager:
                 
                 # Bedrock packs have manifest.json at the root
                 if not (input_path / "manifest.json").exists():
-                    logger.error("Could not find manifest.json in the Bedrock resource pack folder")
+                    logger.error("Missing required manifest.json in Bedrock resource pack folder")
                     return None
                 
                 logger.info(f"Found Bedrock pack root: {input_path}")
@@ -208,9 +208,13 @@ class BedrockPackManager:
             
             # Handle directory input
             if input_path.is_dir():
-                # Calculate directory size
-                total_size = sum(f.stat().st_size for f in input_path.rglob('*') if f.is_file())
-                pack_info["file_size"] = total_size
+                # Calculate directory size with error handling
+                try:
+                    total_size = sum(f.stat().st_size for f in input_path.rglob('*') if f.is_file())
+                    pack_info["file_size"] = total_size
+                except (OSError, PermissionError) as e:
+                    logger.warning(f"Could not calculate directory size: {str(e)}")
+                    pack_info["file_size"] = 0
                 
                 # Count textures
                 textures_dir = input_path / "textures"
@@ -243,8 +247,8 @@ class BedrockPackManager:
                         pack_info["description"] = header.get('description', pack_info["description"])
                         pack_info["version"] = header.get('version')
                         
-                    except json.JSONDecodeError:
-                        logger.warning("Could not parse manifest.json")
+                    except json.JSONDecodeError as e:
+                        logger.warning(f"Could not parse manifest.json in directory: {str(e)}")
                 else:
                     pack_info["name"] = input_path.name
                 
@@ -283,8 +287,8 @@ class BedrockPackManager:
                         pack_info["description"] = header.get('description', pack_info["description"])
                         pack_info["version"] = header.get('version')
                         
-                    except json.JSONDecodeError:
-                        logger.warning("Could not parse manifest.json")
+                    except json.JSONDecodeError as e:
+                        logger.warning(f"Could not parse manifest.json in archive: {str(e)}")
                 else:
                     pack_info["name"] = input_path.stem
                     
