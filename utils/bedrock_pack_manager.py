@@ -21,7 +21,7 @@ class BedrockPackManager:
     
     def extract_bedrock_pack(self, input_path: str, extract_dir: Path) -> Optional[Path]:
         """
-        Extract Bedrock Edition resource pack (.mcpack)
+        Extract Bedrock Edition resource pack (.mcpack, .zip, or folder)
         
         Returns:
             Path to the extracted pack root or None if extraction fails
@@ -30,11 +30,24 @@ class BedrockPackManager:
             input_path = Path(input_path)
             
             if not input_path.exists():
-                logger.error(f"Input file does not exist: {input_path}")
+                logger.error(f"Input path does not exist: {input_path}")
                 return None
             
+            # If input is a directory, validate and return it directly
+            if input_path.is_dir():
+                logger.info(f"Using Bedrock resource pack folder: {input_path.name}")
+                
+                # Bedrock packs have manifest.json at the root
+                if not (input_path / "manifest.json").exists():
+                    logger.error("Could not find manifest.json in the Bedrock resource pack folder")
+                    return None
+                
+                logger.info(f"Found Bedrock pack root: {input_path}")
+                return input_path
+            
+            # If input is a file, it must be .mcpack or .zip
             if input_path.suffix.lower() not in ['.mcpack', '.zip']:
-                logger.error("Input file must be a .mcpack or .zip file")
+                logger.error("Input file must be a .mcpack, .zip file, or a folder")
                 return None
             
             logger.info(f"Extracting Bedrock resource pack: {input_path.name}")
@@ -93,11 +106,51 @@ class BedrockPackManager:
             input_path = Path(input_path)
             
             if not input_path.exists():
-                validation_result["errors"].append("File does not exist")
+                validation_result["errors"].append("Path does not exist")
                 return validation_result
             
+            # Handle directory input
+            if input_path.is_dir():
+                # Check for manifest.json
+                if (input_path / "manifest.json").exists():
+                    validation_result["has_manifest"] = True
+                
+                # Check for textures
+                textures_dir = input_path / "textures"
+                if textures_dir.exists():
+                    texture_paths = list(textures_dir.rglob("*.png"))
+                    if texture_paths:
+                        validation_result["has_textures"] = True
+                    
+                    # Get texture categories
+                    categories = set()
+                    for texture_path in texture_paths:
+                        try:
+                            relative_path = texture_path.relative_to(textures_dir)
+                            parts = relative_path.parts
+                            if len(parts) >= 2:
+                                categories.add(parts[0])  # blocks, items, entity, etc.
+                        except ValueError:
+                            pass
+                    
+                    validation_result["texture_categories"] = sorted(list(categories))
+                
+                validation_result["valid"] = (
+                    validation_result["has_manifest"] and 
+                    validation_result["has_textures"]
+                )
+                
+                if not validation_result["valid"]:
+                    if not validation_result["has_manifest"]:
+                        validation_result["errors"].append("No manifest.json found")
+                    if not validation_result["has_textures"]:
+                        validation_result["errors"].append("No texture files found")
+                
+                return validation_result
+            
+            # Handle file input (.mcpack or .zip)
             if input_path.suffix.lower() not in ['.mcpack', '.zip']:
-                validation_result["errors"].append("File is not a .mcpack or .zip file")
+                validation_result["errors"].append("File is not a .mcpack, .zip file, or folder")
                 return validation_result
             
             with zipfile.ZipFile(input_path, 'r') as zip_ref:
@@ -152,6 +205,52 @@ class BedrockPackManager:
         
         try:
             input_path = Path(input_path)
+            
+            # Handle directory input
+            if input_path.is_dir():
+                # Calculate directory size
+                total_size = sum(f.stat().st_size for f in input_path.rglob('*') if f.is_file())
+                pack_info["file_size"] = total_size
+                
+                # Count textures
+                textures_dir = input_path / "textures"
+                if textures_dir.exists():
+                    texture_files = list(textures_dir.rglob("*.png"))
+                    pack_info["texture_count"] = len(texture_files)
+                    
+                    # Get categories
+                    categories = set()
+                    for texture_path in texture_files:
+                        try:
+                            relative_path = texture_path.relative_to(textures_dir)
+                            parts = relative_path.parts
+                            if len(parts) >= 2:
+                                categories.add(parts[0])
+                        except ValueError:
+                            pass
+                    
+                    pack_info["categories"] = sorted(list(categories))
+                
+                # Read manifest
+                manifest_path = input_path / "manifest.json"
+                if manifest_path.exists():
+                    try:
+                        with open(manifest_path, 'r', encoding='utf-8') as f:
+                            manifest_data = json.load(f)
+                        
+                        header = manifest_data.get('header', {})
+                        pack_info["name"] = header.get('name', pack_info["name"])
+                        pack_info["description"] = header.get('description', pack_info["description"])
+                        pack_info["version"] = header.get('version')
+                        
+                    except json.JSONDecodeError:
+                        logger.warning("Could not parse manifest.json")
+                else:
+                    pack_info["name"] = input_path.name
+                
+                return pack_info
+            
+            # Handle file input
             pack_info["file_size"] = input_path.stat().st_size
             
             with zipfile.ZipFile(input_path, 'r') as zip_ref:

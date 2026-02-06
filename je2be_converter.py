@@ -441,7 +441,7 @@ Examples:
     convert_parser.add_argument('--rtxfix', action='store_true', help='Apply RTX fixes from rtxfix folder')
     
     reverse_parser = subparsers.add_parser('reverse', help='Convert Bedrock Edition to Java Edition')
-    reverse_parser.add_argument('input', help='Input Bedrock Edition resource pack (.mcpack or .zip)')
+    reverse_parser.add_argument('input', help='Input Bedrock Edition resource pack (.mcpack, .zip, or folder)')
     reverse_parser.add_argument('output', help='Output Java Edition pack (.zip)')
     reverse_parser.add_argument('--pack-name', help='Custom pack name')
     reverse_parser.add_argument('--pack-description', help='Custom pack description')
