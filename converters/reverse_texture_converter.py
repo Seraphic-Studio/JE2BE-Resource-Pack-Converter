@@ -135,12 +135,14 @@ class ReverseTextureConverter:
             try:
                 relative_path = bedrock_file.relative_to(bedrock_dir)
                 bedrock_name = relative_path.stem
+                bedrock_name_with_ext = f"{bedrock_name}.png"
                 
-                # Look up the Java name
-                java_name = self.reverse_mappings.get(bedrock_name, None)
+                # Look up the Java name (mappings include .png extension)
+                java_name_with_ext = self.reverse_mappings.get(bedrock_name_with_ext, None)
                 
-                if java_name:
-                    # Use mapped Java name
+                if java_name_with_ext:
+                    # Use mapped Java name (remove .png extension as we'll add it back)
+                    java_name = java_name_with_ext.replace('.png', '')
                     java_file = java_dir / f"{java_name}.png"
                     
                     if java_file.exists():
