@@ -17,6 +17,7 @@ from utils.pack_manager import PackManager
 from converters.texture_converter import TextureConverter
 from converters.bedrock_generator import BedrockStructureGenerator
 from converters.pbr_converter import PBRConverter
+from be2je_converter import BE2JEConverter
 
 logging.basicConfig(
     level=logging.INFO,
@@ -413,13 +414,15 @@ class JE2BEConverter:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="JE2BE Resource Pack Converter - Convert Java Edition resource packs to Bedrock Edition",
+        description="JE2BE Resource Pack Converter - Convert between Java Edition and Bedrock Edition resource packs",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
   %(prog)s convert pack.zip converted.mcpack
   %(prog)s convert pack.zip converted.mcpack --pack-name "My Pack"
   %(prog)s convert pack.zip converted.mcpack --pack-name "My Pack" --essentials --rtxfix
+  %(prog)s reverse bedrock_pack.mcpack java_pack.zip
+  %(prog)s reverse bedrock_pack.mcpack java_pack.zip --pack-name "My Pack"
   %(prog)s info
   %(prog)s validate
         """
@@ -427,7 +430,7 @@ Examples:
     
     subparsers = parser.add_subparsers(dest='command', help='Available commands')
     
-    convert_parser = subparsers.add_parser('convert', help='Convert a resource pack')
+    convert_parser = subparsers.add_parser('convert', help='Convert Java Edition to Bedrock Edition')
     convert_parser.add_argument('input', help='Input Java Edition resource pack (.zip)')
     convert_parser.add_argument('output', help='Output Bedrock Edition pack (.mcpack)')
     convert_parser.add_argument('--pack-name', help='Custom pack name')
@@ -436,6 +439,13 @@ Examples:
     convert_parser.add_argument('--disable-pbr', action='store_true', help='Disable PBR texture conversion')
     convert_parser.add_argument('--essentials', action='store_true', help='Copy files from essentials folder to blocks folder')
     convert_parser.add_argument('--rtxfix', action='store_true', help='Apply RTX fixes from rtxfix folder')
+    
+    reverse_parser = subparsers.add_parser('reverse', help='Convert Bedrock Edition to Java Edition')
+    reverse_parser.add_argument('input', help='Input Bedrock Edition resource pack (.mcpack or .zip)')
+    reverse_parser.add_argument('output', help='Output Java Edition pack (.zip)')
+    reverse_parser.add_argument('--pack-name', help='Custom pack name')
+    reverse_parser.add_argument('--pack-description', help='Custom pack description')
+    reverse_parser.add_argument('--no-validation', action='store_true', help='Skip input pack validation')
     
     info_parser = subparsers.add_parser('info', help='Show mapping information')
     
@@ -486,6 +496,18 @@ Examples:
                 enable_pbr=not args.disable_pbr,
                 essentials=args.essentials,
                 rtxfix=args.rtxfix
+            )
+            
+            return 0 if success else 1
+        
+        elif args.command == 'reverse':
+            reverse_converter = BE2JEConverter()
+            success = reverse_converter.convert_resource_pack(
+                args.input,
+                args.output,
+                args.pack_name,
+                args.pack_description,
+                validate_input=not args.no_validation
             )
             
             return 0 if success else 1
